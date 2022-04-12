@@ -7,5 +7,9 @@ def home(request):
     return render(request, 'blog/home.html')
 
 
-def blog(request, slug):
+def all_blogs(request):
+    return render(request, 'blog/blogs.html')
+
+
+def blog_detail(request, slug):
     return render(request, 'blog/blog.html', {'slug': slug})
