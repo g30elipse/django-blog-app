@@ -1,4 +1,5 @@
 from datetime import date
+from django.http import Http404
 from django.shortcuts import render
 
 # Create your views here.
@@ -79,4 +80,8 @@ def all_blogs(request):
 
 
 def blog_detail(request, slug):
-    return render(request, 'blog/blog.html', {'slug': slug})
+    try:
+        blog = [blog for blog in blogs if blog['slug'] == slug][0]
+        return render(request, 'blog/blog.html', {'blog': blog})
+    except:
+        raise Http404("Blog not found")
