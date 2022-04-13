@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
-    <title>Blog | {{slug}}</title>
+<title>Blog | {{slug}}</title>
 {% endblock title %}
 
 {% block content %}
-<h1>blog detail page {{slug}}</h1>
+    {% include 'blog/partials/header.html' %}
+    
+    <h1>blog detail page {{slug}}</h1>
 {% endblock content %}

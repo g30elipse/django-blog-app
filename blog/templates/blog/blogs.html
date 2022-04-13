@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 
+
+
 {% block title %}
 <title>All Blogs</title>
 {% endblock title %}
 
 {% block content %}
-    <h1>All Blogs</h1>
+    {% include 'blog/partials/header.html' %}
+
+    <div class="container">
+        <h1>All Blogs</h1>
+
+        <div class="tile is-ancestor">
+            <div class="tile is-parent is-4">
+                {% include 'blog/partials/blog-item.html' %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}
