@@ -5,7 +5,7 @@ from .models import Author, Post, Tag
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'date']
-    list_filter = ['date']
+    list_filter = ['date', 'tags']
     search_fields = ['title', 'content']
     readonly_fields = ['slug']
 
