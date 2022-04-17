@@ -12,9 +12,9 @@
     <div class="container py-6">
         <h1 class="title is-1">All Blogs</h1>
 
-        <div class="tile is-ancestor">
+        <div class="columns is-multiline">
             {% for blog in blogs %}
-                <div class="tile is-parent is-4">
+                <div class="column is-one-quarter">
                     {% include 'blog/partials/blog-item.html' with blog=blog %}
                 </div>
             {% endfor %}
