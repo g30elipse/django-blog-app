@@ -1,24 +1,33 @@
 from datetime import date
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView
 from .models import Post
 
 # Create your views here.
 
 
-def home(request):
-    recent_blogs = Post.objects.all().order_by('-date')[:3]
-    return render(request, 'blog/home.html', {'blogs': recent_blogs})
+class BlogListView(ListView):
+    template_name = 'blog/blogs.html'
+    context_object_name = 'blogs'
+    model = Post
+    ordering = '-date'
 
 
-def all_blogs(request):
-    blogs = Post.objects.all().order_by('-date')
-    return render(request, 'blog/blogs.html', {'blogs': blogs})
+class BlogDetailView(DetailView):
+    template_name = 'blog/blog.html'
+    context_object_name = 'blog'
+    model = Post
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["tags"] = self.object.tags.all()
+        return context
 
 
-def blog_detail(request, slug):
-    blog = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/blog.html', {
-        'blog': blog,
-        'tags': blog.tags.all()
-    })
+class HomeView(ListView):
+    model = Post
+    template_name = 'blog/home.html'
+    context_object_name = 'blogs'
+    ordering = ['-date']
+    paginate_by = 3
