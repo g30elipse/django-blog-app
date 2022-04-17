@@ -2,7 +2,7 @@
 
 
 {% block title %}
-<title>Blog | {{slug}}</title>
+<title>Blog | {{blog.slug}}</title>
 {% endblock title %}
 
 {% block content %}
@@ -23,6 +23,23 @@
             {% endfor %}
             </ul>
             <p class="has-text-justified p-5">{{blog.content | linebreaksbr}}</p>
+            <hr/>
+            <div class="my-5">
+                <form action="{% url 'blog-detail' blog.slug %}" method="POST" class="is-flex is-flex-direction-column">
+                    {% csrf_token %}
+                    {{comment_form}}
+                    <button>Submit</button>
+                </form>
+            </div>
+
+            <div class="my-5">
+                <h3 class="title is-3">Comments</h3>
+                {% for comment in comments %}
+                    <div class="box">
+                        <p>{{comment.text}}</p>
+                        <p>{{comment.user_name}}</p>
+                    </div>
+                {% endfor %}
         {% else %}
             
             <h1 class="title is-1">Not found</h1>
