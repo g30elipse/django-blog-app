@@ -26,7 +26,7 @@ class Post(models.Model):
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(default='', db_index=True)
-
+    image = models.ImageField(upload_to='post_images/', blank=True)
     tags = models.ManyToManyField(Tag, related_name='posts')
     author = models.ForeignKey(
         Author, on_delete=models.SET_NULL, null=True, related_name='posts')

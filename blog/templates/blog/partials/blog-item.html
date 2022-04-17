@@ -1,10 +1,12 @@
 <a class="has-text-grey	" href="{% url 'blog-detail' blog.slug %}">
     <article class="card">
+        {% if blog.image %}
         <div class="card-image">
             <figure class="image is-4by3">
-            <img src="{{ blog.image }}" alt="Placeholder image">
+            <img src="{{ blog.image.url }}" alt="Placeholder image">
             </figure>
         </div>
+        {% endif %}
         <div class="card-content">
             <div class="content">
                 <h1 class="title is-4">{{ blog.title }}</h1>
